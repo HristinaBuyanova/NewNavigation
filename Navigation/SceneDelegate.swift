@@ -18,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func createProfileViewController() -> UINavigationController {
-        let navigationVC = UINavigationController(rootViewController: ProfileViewController())
+        let navigationVC = UINavigationController(rootViewController: LogInViewController())
         navigationVC.tabBarItem = UITabBarItem(title: "Profil", image: UIImage (systemName: "person.fill"), tag: 1)
         return navigationVC
     }

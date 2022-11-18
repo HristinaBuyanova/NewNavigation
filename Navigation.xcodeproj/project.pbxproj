@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E8892E52928176F00F6FD2B /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8892E42928176F00F6FD2B /* LogInViewController.swift */; };
 		6E898A3A29141CA800E49C37 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E898A3929141CA800E49C37 /* PostViewController.swift */; };
 		6E898A3C2914556300E49C37 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E898A3B2914556300E49C37 /* Post.swift */; };
 		6E898A3E29145C7900E49C37 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E898A3D29145C7900E49C37 /* InfoViewController.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6E8892E42928176F00F6FD2B /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		6E898A3929141CA800E49C37 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		6E898A3B2914556300E49C37 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		6E898A3D29145C7900E49C37 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
@@ -50,6 +52,7 @@
 			children = (
 				6EA201EC2919864F00B75CAE /* ProfileHeaderView.swift */,
 				6EB8BE562913F246002E4774 /* ProfileViewController.swift */,
+				6E8892E42928176F00F6FD2B /* LogInViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -159,6 +162,7 @@
 			files = (
 				6EC0E04529110F8800E8E7C3 /* AppDelegate.swift in Sources */,
 				6EB8BE552913F236002E4774 /* FeedViewController.swift in Sources */,
+				6E8892E52928176F00F6FD2B /* LogInViewController.swift in Sources */,
 				6EB8BE572913F246002E4774 /* ProfileViewController.swift in Sources */,
 				6E898A3E29145C7900E49C37 /* InfoViewController.swift in Sources */,
 				6E898A3C2914556300E49C37 /* Post.swift in Sources */,

@@ -9,9 +9,8 @@ import UIKit
 
 class LogInViewController: UIViewController {
     
-    var scrollView = UIScrollView()
-    
-    
+    let scrollView = UIScrollView()
+        
     let contentView = UIView()
     
     var logoVK: UIImageView = {
@@ -60,24 +59,13 @@ class LogInViewController: UIViewController {
         button.clipsToBounds = true
         button.setTitle("Log in", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.addTarget(Any?.self, action: #selector(buttonState), for: .touchUpInside)
+        button.setTitleColor(.init(white: 0, alpha: 0.8), for: .selected)
+        button.setTitleColor(.init(white: 0, alpha: 0.8), for: .highlighted)
+        button.setTitleColor(.init(white: 0, alpha: 0.8), for: .disabled)
+        button.addTarget(Any?.self, action: #selector(buttonAction), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     } ()
-    
-    @objc func buttonState() {
-        if logInButton.isSelected {
-            logInButton.alpha = 0.8
-        } else if logInButton.isHighlighted {
-            logInButton.alpha = 0.8
-        } else if logInButton.isEnabled {
-            logInButton.alpha = 0.8
-        } else {
-            logInButton.alpha = 1
-        }
-        let profileVC = ProfileViewController()
-        self.navigationController?.pushViewController(profileVC, animated: true)
-    }
     
     
     override func viewDidLoad() {
@@ -86,7 +74,20 @@ class LogInViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = true
         addMySubvire()
         setupScrollView()
+        scrollView.keyboardDismissMode = .onDrag
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        subscribeKeyboardEvents()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    
     
     func addMySubvire() {
         view.addSubview(scrollView)
@@ -102,16 +103,16 @@ class LogInViewController: UIViewController {
     
     func setupScrollView() {
         NSLayoutConstraint.activate([
-            scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            scrollView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            scrollView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            scrollView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
             contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            contentView.heightAnchor.constraint(equalToConstant: 600),
+            contentView.heightAnchor.constraint(equalToConstant: 900),
             
             logoVK.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             logoVK.widthAnchor.constraint(equalToConstant: 100),
@@ -136,5 +137,25 @@ class LogInViewController: UIViewController {
             logInButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 16)
         ])
     }
-
+    
+    @objc func buttonAction() {
+        let profileVC = ProfileViewController()
+        self.navigationController?.pushViewController(profileVC, animated: true)
+    }
+    
+    
+    func subscribeKeyboardEvents() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardWillShow(_ notification: NSNotification) {
+        guard let ks = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {return}
+        self.scrollView.contentOffset = CGPoint(x: 0, y: ks.height - self.view.safeAreaInsets.bottom)
+    }
+    
+    @objc func keyboardWillHide(_ notification: NSNotification) {
+        self.scrollView.contentOffset = .zero
+    }
+    
 }

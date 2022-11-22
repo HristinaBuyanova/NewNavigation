@@ -48,9 +48,9 @@ class LogInViewController: UIViewController {
         email.font = .systemFont(ofSize: 16)
         email.textAlignment = .left
 //        email.layer.cornerRadius = 10
-        email.layer.borderWidth = 0.5
+//        email.layer.borderWidth = 0.5
         email.placeholder = "   Email or phone"
-        email.layer.borderColor = UIColor.lightGray.cgColor
+//        email.layer.borderColor = UIColor.lightGray.cgColor
         email.autocapitalizationType = .none
         email.translatesAutoresizingMaskIntoConstraints = false
         return email
@@ -63,9 +63,9 @@ class LogInViewController: UIViewController {
         password.font = .systemFont(ofSize: 16)
         password.textAlignment = .left
 //        password.layer.cornerRadius = 10
-        password.layer.borderWidth = 0.5
+//        password.layer.borderWidth = 0.5
         password.placeholder = "   Password"
-        password.layer.borderColor = UIColor.lightGray.cgColor
+//        password.layer.borderColor = UIColor.lightGray.cgColor
         password.autocapitalizationType = .none
         password.isSecureTextEntry = true
         password.translatesAutoresizingMaskIntoConstraints = false

@@ -11,91 +11,62 @@ class ProfileViewController: UIViewController {
     
     let tableView: UITableView = {
         let table = UITableView()
-        
+        table.translatesAutoresizingMaskIntoConstraints = false
+        table.rowHeight = 700
+        table.register(PostTableViewCell.self, forCellReuseIdentifier: "cell")
         return table
     }()
     
-    
-    let header = ProfileHeaderView()
+//    let header = ProfileHeaderView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .lightGray
         title = "Profile"
-        view.addSubview(tableView)
         
+        view.addSubview(tableView)
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        
+//        NSLayoutConstraint.activate([
+//            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+//            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+//            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+//            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+//        ])
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tableView.frame = view.bounds
+    }
     
-    
-    
-    
-    
-    
-//    let profileHeaderView = ProfileHeaderView()
-//    
-//    var buttonTitleChange: UIButton = {
-//        let buttonForTitle = UIButton()
-//        buttonForTitle.backgroundColor = .blue
-//        buttonForTitle.setTitle("Change Title", for: .normal)
-//        buttonForTitle.setTitleColor(UIColor.white, for: .normal)
-//        buttonForTitle.layer.cornerRadius = 4
-//        buttonForTitle.layer.shadowOffset = CGSize(width: 4, height: 4)
-//        buttonForTitle.layer.shadowRadius = 4
-//        buttonForTitle.layer.shadowColor = UIColor.black.cgColor
-//        buttonForTitle.layer.shadowOpacity = 0.7
-//        buttonForTitle.layer.masksToBounds = false
-//        buttonForTitle.addTarget(Any?.self, action: #selector(titleChange), for: .touchUpInside)
-//        buttonForTitle.translatesAutoresizingMaskIntoConstraints = false
-//        return buttonForTitle
-//    }()
-//    
-//    @objc func titleChange() {
-//            profileHeaderView.fullNameLabel.text = "New name"
-//        }
-//    
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        view.backgroundColor = .white
-//        title = "Profile"
-//        setupView()
-//    }
-//    
-//    func setupView() {
-//        profileHeaderView.backgroundColor = .systemGray
-//        view.addSubview(profileHeaderView)
-//        profileHeaderView.translatesAutoresizingMaskIntoConstraints = false
-//        view.addSubview(buttonTitleChange)
-//        let safeArea = view.safeAreaLayoutGuide
-//
-//        NSLayoutConstraint.activate([
-//            profileHeaderView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0),
-//            profileHeaderView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0),
-//            profileHeaderView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 0),
-//            profileHeaderView.heightAnchor.constraint(equalToConstant: 220),
-//            
-//            buttonTitleChange.heightAnchor.constraint(equalToConstant: 50),
-//            buttonTitleChange.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0),
-//            buttonTitleChange.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0),
-//            buttonTitleChange.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)
-//        ])
-//    }
-//    
-//    override func viewWillLayoutSubviews() {
-//        super.viewWillLayoutSubviews()
-//        profileHeaderView.frame = view.frame
-//    }
-//    
 }
 
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        <#code#>
+        return postArray.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! PostTableViewCell
+        let row = postArray[indexPath.row]
+        cell.settingArray(array: row)
+        return cell
     }
     
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        var headerView = UIView()
+        if section == 0 {
+            headerView = ProfileHeaderView()
+        }
+        return headerView
+    }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        220
+    }
+    
+
 }

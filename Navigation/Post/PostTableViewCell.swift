@@ -26,7 +26,7 @@ class PostTableViewCell: UITableViewCell {
         return image
     }()
     
-    let descriptionText: UILabel = {
+    let descriptionTextLabel: UILabel = {
         let text = UILabel()
         text.font = .systemFont(ofSize: 14)
         text.textColor = .systemGray
@@ -35,7 +35,7 @@ class PostTableViewCell: UITableViewCell {
         return text
     }()
     
-    let numberOfLikes: UILabel = {
+    let numberOfLikesLabel: UILabel = {
         let likes = UILabel()
         likes.font = .systemFont(ofSize: 16)
         likes.textColor = .black
@@ -43,7 +43,7 @@ class PostTableViewCell: UITableViewCell {
         return likes
     }()
     
-    let numberOfViews: UILabel = {
+    let numberOfViewsLabel: UILabel = {
         let views = UILabel()
         views.font = .systemFont(ofSize: 16)
         views.textColor = .black
@@ -62,25 +62,12 @@ class PostTableViewCell: UITableViewCell {
     }
     
     
-//    override func awakeFromNib() {
-//        super.awakeFromNib()
-//        // Initialization code
-//    }
-//
-//    override func setSelected(_ selected: Bool, animated: Bool) {
-//        super.setSelected(selected, animated: animated)
-//
-//        // Configure the view for the selected state
-//    }
-//
-    
-    
     func addMyView () {
         contentView.addSubview(authorPost)
         contentView.addSubview(imagePost)
-        contentView.addSubview(descriptionText)
-        contentView.addSubview(numberOfLikes)
-        contentView.addSubview(numberOfViews)
+        contentView.addSubview(descriptionTextLabel)
+        contentView.addSubview(numberOfLikesLabel)
+        contentView.addSubview(numberOfViewsLabel)
     }
     
     func setupView() {
@@ -95,16 +82,24 @@ class PostTableViewCell: UITableViewCell {
             imagePost.widthAnchor.constraint(equalTo: contentView.widthAnchor),
             imagePost.heightAnchor.constraint(equalTo: contentView.widthAnchor),
             
-            descriptionText.topAnchor.constraint(equalTo: imagePost.bottomAnchor, constant: 16),
-            descriptionText.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            descriptionText.widthAnchor.constraint(equalTo: contentView.widthAnchor, constant: -32),
+            descriptionTextLabel.topAnchor.constraint(equalTo: imagePost.bottomAnchor, constant: 16),
+            descriptionTextLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            descriptionTextLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, constant: -32),
             
-            numberOfLikes.topAnchor.constraint(equalTo: descriptionText.bottomAnchor, constant: 16),
-            numberOfLikes.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            numberOfLikesLabel.topAnchor.constraint(equalTo: descriptionTextLabel.bottomAnchor, constant: 16),
+            numberOfLikesLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             
-            numberOfViews.topAnchor.constraint(equalTo: descriptionText.bottomAnchor, constant: 16),
-            numberOfViews.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
+            numberOfViewsLabel.topAnchor.constraint(equalTo: descriptionTextLabel.bottomAnchor, constant: 16),
+            numberOfViewsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
         ])
+    }
+    
+    func settingArray(array: PostNew) {
+        authorPost.text = array.author
+        imagePost.image = UIImage(named: array.image)
+        descriptionTextLabel.text = array.description
+        numberOfLikesLabel.text = "Likes: \(array.likes)"
+        numberOfViewsLabel.text = "Views: \(array.views)"
     }
 
 }

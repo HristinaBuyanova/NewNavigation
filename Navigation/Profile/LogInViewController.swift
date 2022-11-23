@@ -20,6 +20,26 @@ class LogInViewController: UIViewController {
         return logoImage
     }()
     
+    var stackForLogin: UIStackView = {
+        let stack = UIStackView()
+        stack.layer.borderColor = UIColor.lightGray.cgColor
+        stack.layer.borderWidth = 0.5
+        stack.layer.cornerRadius = 10
+        stack.clipsToBounds = true
+        stack.axis = .vertical
+        stack.alignment = .fill
+        stack.distribution = .fillEqually
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    
+    var separatorView: UIView = {
+        var view = UIView()
+        view.backgroundColor = .lightGray
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
 
     var logInTextField: UITextField = {
         let email = UITextField()
@@ -27,10 +47,10 @@ class LogInViewController: UIViewController {
         email.textColor = .black
         email.font = .systemFont(ofSize: 16)
         email.textAlignment = .left
-        email.layer.cornerRadius = 10
-        email.layer.borderWidth = 0.5
+//        email.layer.cornerRadius = 10
+//        email.layer.borderWidth = 0.5
         email.placeholder = "   Email or phone"
-        email.layer.borderColor = UIColor.lightGray.cgColor
+//        email.layer.borderColor = UIColor.lightGray.cgColor
         email.autocapitalizationType = .none
         email.translatesAutoresizingMaskIntoConstraints = false
         return email
@@ -42,10 +62,10 @@ class LogInViewController: UIViewController {
         password.textColor = .black
         password.font = .systemFont(ofSize: 16)
         password.textAlignment = .left
-        password.layer.cornerRadius = 10
-        password.layer.borderWidth = 0.5
+//        password.layer.cornerRadius = 10
+//        password.layer.borderWidth = 0.5
         password.placeholder = "   Password"
-        password.layer.borderColor = UIColor.lightGray.cgColor
+//        password.layer.borderColor = UIColor.lightGray.cgColor
         password.autocapitalizationType = .none
         password.isSecureTextEntry = true
         password.translatesAutoresizingMaskIntoConstraints = false
@@ -93,8 +113,10 @@ class LogInViewController: UIViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubview(logoVK)
-        contentView.addSubview(logInTextField)
-        contentView.addSubview(passwordTextField)
+        contentView.addSubview(stackForLogin)
+        stackForLogin.addSubview(logInTextField)
+        stackForLogin.addSubview(passwordTextField)
+        stackForLogin.addSubview(separatorView)
         contentView.addSubview(logInButton)
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -119,17 +141,36 @@ class LogInViewController: UIViewController {
             logoVK.heightAnchor.constraint(equalToConstant: 100),
             logoVK.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 120),
             
+            stackForLogin.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            stackForLogin.widthAnchor.constraint(equalTo: contentView.widthAnchor, constant: -32),
+            stackForLogin.heightAnchor.constraint(equalToConstant: 100),
+            stackForLogin.topAnchor.constraint(equalTo: logoVK.bottomAnchor, constant: 120),
             
-            logInTextField.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            logInTextField.widthAnchor.constraint(equalTo: contentView.widthAnchor, constant: -32),
+            logInTextField.centerXAnchor.constraint(equalTo: stackForLogin.centerXAnchor),
+            logInTextField.widthAnchor.constraint(equalTo: stackForLogin.widthAnchor),
             logInTextField.heightAnchor.constraint(equalToConstant: 50),
-            logInTextField.topAnchor.constraint(equalTo: logoVK.bottomAnchor, constant: 120),
+            logInTextField.topAnchor.constraint(equalTo: stackForLogin.topAnchor),
             
+            separatorView.centerXAnchor.constraint(equalTo: stackForLogin.centerXAnchor),
+            separatorView.widthAnchor.constraint(equalTo: stackForLogin.widthAnchor),
+            separatorView.heightAnchor.constraint(equalToConstant: 0.5),
+            separatorView.topAnchor.constraint(equalTo: logInTextField.bottomAnchor),
             
-            passwordTextField.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            passwordTextField.widthAnchor.constraint(equalTo: contentView.widthAnchor, constant: -32),
+            passwordTextField.centerXAnchor.constraint(equalTo: stackForLogin.centerXAnchor),
+            passwordTextField.widthAnchor.constraint(equalTo: stackForLogin.widthAnchor),
             passwordTextField.heightAnchor.constraint(equalToConstant: 50),
             passwordTextField.topAnchor.constraint(equalTo: logInTextField.bottomAnchor),
+            
+//            logInTextField.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+//            logInTextField.widthAnchor.constraint(equalTo: contentView.widthAnchor, constant: -32),
+//            logInTextField.heightAnchor.constraint(equalToConstant: 50),
+//            logInTextField.topAnchor.constraint(equalTo: logoVK.bottomAnchor, constant: 120),
+//
+//
+//            passwordTextField.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+//            passwordTextField.widthAnchor.constraint(equalTo: contentView.widthAnchor, constant: -32),
+//            passwordTextField.heightAnchor.constraint(equalToConstant: 50),
+//            passwordTextField.topAnchor.constraint(equalTo: logInTextField.bottomAnchor),
             
             logInButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             logInButton.widthAnchor.constraint(equalTo: contentView.widthAnchor, constant: -32),

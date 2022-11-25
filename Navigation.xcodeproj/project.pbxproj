@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6E0201F7292D476C00B008F8 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0201F6292D476C00B008F8 /* PostTableViewCell.swift */; };
+		6E0201F929312C4400B008F8 /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0201F829312C4400B008F8 /* PhotosTableViewCell.swift */; };
 		6E8892E52928176F00F6FD2B /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8892E42928176F00F6FD2B /* LogInViewController.swift */; };
 		6E898A3A29141CA800E49C37 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E898A3929141CA800E49C37 /* PostViewController.swift */; };
 		6E898A3C2914556300E49C37 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E898A3B2914556300E49C37 /* Post.swift */; };
@@ -23,6 +24,7 @@
 
 /* Begin PBXFileReference section */
 		6E0201F6292D476C00B008F8 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
+		6E0201F829312C4400B008F8 /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
 		6E8892E42928176F00F6FD2B /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		6E898A3929141CA800E49C37 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		6E898A3B2914556300E49C37 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -54,6 +56,7 @@
 			children = (
 				6E898A3B2914556300E49C37 /* Post.swift */,
 				6E0201F6292D476C00B008F8 /* PostTableViewCell.swift */,
+				6E0201F829312C4400B008F8 /* PhotosTableViewCell.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -174,6 +177,7 @@
 				6EC0E04529110F8800E8E7C3 /* AppDelegate.swift in Sources */,
 				6EB8BE552913F236002E4774 /* FeedViewController.swift in Sources */,
 				6E8892E52928176F00F6FD2B /* LogInViewController.swift in Sources */,
+				6E0201F929312C4400B008F8 /* PhotosTableViewCell.swift in Sources */,
 				6EB8BE572913F246002E4774 /* ProfileViewController.swift in Sources */,
 				6E898A3E29145C7900E49C37 /* InfoViewController.swift in Sources */,
 				6E898A3C2914556300E49C37 /* Post.swift in Sources */,

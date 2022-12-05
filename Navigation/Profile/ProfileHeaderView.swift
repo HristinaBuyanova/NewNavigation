@@ -139,6 +139,11 @@ class ProfileHeaderView: UIView {
     @objc func buttonPressed() {
         
         statusLabel.text = statusText
+        if statusTextField.text == "" {
+            statusTextField.layer.borderColor = UIColor.red.cgColor
+        } else {
+            statusTextField.layer.borderColor = UIColor.black.cgColor
+        }
         
     }
     

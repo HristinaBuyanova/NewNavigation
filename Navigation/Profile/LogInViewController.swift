@@ -9,6 +9,10 @@ import UIKit
 
 class LogInViewController: UIViewController {
     
+    let minSymbol = 2
+    let standartLogin = "hipstercat"
+    let standartPassword = "12345678"
+    
     let scrollView = UIScrollView()
         
     let contentView = UIView()
@@ -48,10 +52,7 @@ class LogInViewController: UIViewController {
         email.textColor = .black
         email.font = .systemFont(ofSize: 16)
         email.textAlignment = .left
-//        email.layer.cornerRadius = 10
-//        email.layer.borderWidth = 0.5
         email.placeholder = " Email or phone"
-//        email.layer.borderColor = UIColor.lightGray.cgColor
         email.autocapitalizationType = .none
         email.translatesAutoresizingMaskIntoConstraints = false
         return email
@@ -63,10 +64,7 @@ class LogInViewController: UIViewController {
         password.textColor = .black
         password.font = .systemFont(ofSize: 16)
         password.textAlignment = .left
-//        password.layer.cornerRadius = 10
-//        password.layer.borderWidth = 0.5
         password.placeholder = " Password"
-//        password.layer.borderColor = UIColor.lightGray.cgColor
         password.autocapitalizationType = .none
         password.isSecureTextEntry = true
         password.translatesAutoresizingMaskIntoConstraints = false
@@ -87,6 +85,15 @@ class LogInViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     } ()
+    
+    let warningLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .black
+        label.isHidden = true
+        label.text = "Пароль не может быть меньше 2 символов"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
     
     
     override func viewDidLoad() {
@@ -119,6 +126,7 @@ class LogInViewController: UIViewController {
         stackForLogin.addSubview(passwordTextField)
         stackForLogin.addSubview(separatorView)
         contentView.addSubview(logInButton)
+        contentView.addSubview(warningLabel)
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -162,28 +170,47 @@ class LogInViewController: UIViewController {
             passwordTextField.heightAnchor.constraint(equalToConstant: 50),
             passwordTextField.topAnchor.constraint(equalTo: logInTextField.bottomAnchor),
             
-//            logInTextField.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-//            logInTextField.widthAnchor.constraint(equalTo: contentView.widthAnchor, constant: -32),
-//            logInTextField.heightAnchor.constraint(equalToConstant: 50),
-//            logInTextField.topAnchor.constraint(equalTo: logoVK.bottomAnchor, constant: 120),
-//
-//
-//            passwordTextField.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-//            passwordTextField.widthAnchor.constraint(equalTo: contentView.widthAnchor, constant: -32),
-//            passwordTextField.heightAnchor.constraint(equalToConstant: 50),
-//            passwordTextField.topAnchor.constraint(equalTo: logInTextField.bottomAnchor),
-            
             logInButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             logInButton.widthAnchor.constraint(equalTo: contentView.widthAnchor, constant: -32),
             logInButton.heightAnchor.constraint(equalToConstant: 50),
-            logInButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 16)
+            logInButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 16),
+            
+            warningLabel.topAnchor.constraint(equalTo: logInButton.bottomAnchor, constant: 15),
+            warningLabel.centerXAnchor.constraint(equalTo: stackForLogin.centerXAnchor)
         ])
     }
     
     @objc func buttonAction() {
-        let profileVC = ProfileViewController()
-        self.navigationController?.pushViewController(profileVC, animated: true)
+        if let login = logInTextField.text, login.isEmpty {
+            logInTextField.layer.borderColor = UIColor.red.cgColor
+            logInTextField.layer.borderWidth = 2
+            logInTextField.layer.cornerRadius = 10
+        } else{
+            logInTextField.layer.borderWidth = 0
+            
+            if let pass = passwordTextField.text {
+                if pass.count < minSymbol && pass.count >= 0 {
+                    warningLabel.isHidden = false
+                } else {
+                    warningLabel.isHidden = true
+                    
+                    if standartLogin == logInTextField.text && standartPassword == passwordTextField.text {
+                        let profileVC = ProfileViewController()
+                        self.navigationController?.pushViewController(profileVC, animated: true)
+                    } else {
+                        let alertController = UIAlertController(title: "Ошибка", message: "Введен не верный логин и/или пароль.", preferredStyle: .alert)
+                        let buttonForAlert = UIAlertAction(title: "ОК", style: .default) { buttonForAlert in print("Ok")
+                        }
+                        alertController.addAction(buttonForAlert)
+                        present(alertController, animated: true, completion: nil)
+                    }
+                }
+            }
+            
+            
+        }
     }
+    
     
     
     func subscribeKeyboardEvents() {
@@ -199,5 +226,7 @@ class LogInViewController: UIViewController {
     @objc func keyboardWillHide(_ notification: NSNotification) {
         self.scrollView.contentOffset = .zero
     }
+    
+
     
 }

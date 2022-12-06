@@ -65,6 +65,13 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! PostTableViewCell
             let row = postArray[indexPath.row]
             cell.settingArray(array: row)
+            
+            let tabGesture = UITapGestureRecognizer.init(target: self, action: #selector(addLike))
+            tabGesture.numberOfTapsRequired = 1
+            cell.numberOfLikesLabel.isUserInteractionEnabled = true
+            cell.numberOfLikesLabel.addGestureRecognizer(tabGesture)
+            cell.numberOfLikesLabel.tag = indexPath.row
+            
             return cell
         }
     }
@@ -190,6 +197,13 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         self.navigationController?.isNavigationBarHidden = false
         self.tabBarController?.tabBar.isHidden = false
         tap.view?.removeFromSuperview()
+    }
+    
+    @objc func addLike(gesture: UITapGestureRecognizer) {
+        let indexPath = IndexPath(row: gesture.view!.tag, section: 1)
+        let cell = tableView.cellForRow(at: indexPath) as! PostTableViewCell
+        let count = postArray[indexPath.row]
+        cell.numberOfLikesLabel.text = "Likes: \(count.likes + 1)"
     }
 
 }

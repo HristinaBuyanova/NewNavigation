@@ -51,6 +51,7 @@ class PostTableViewCell: UITableViewCell {
         return views
     }()
     
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addMyView()
@@ -101,5 +102,5 @@ class PostTableViewCell: UITableViewCell {
         numberOfLikesLabel.text = "Likes: \(array.likes)"
         numberOfViewsLabel.text = "Views: \(array.views)"
     }
-
 }
+

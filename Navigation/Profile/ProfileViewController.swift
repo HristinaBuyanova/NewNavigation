@@ -202,8 +202,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     @objc func addLike(gesture: UITapGestureRecognizer) {
         let indexPath = IndexPath(row: gesture.view!.tag, section: 1)
         let cell = tableView.cellForRow(at: indexPath) as! PostTableViewCell
-        let count = postArray[indexPath.row]
-        cell.numberOfLikesLabel.text = "Likes: \(count.likes + 1)"
+        postArray[indexPath.row].likes += 1
+        cell.numberOfLikesLabel.text = "Likes: \(postArray[indexPath.row].likes)"
     }
 
 }
